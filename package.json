@@ -1,0 +1,47 @@
+{
+  "name": "ffme",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "test": "jest"
+  },
+  "author": "Hugo Da Roit <contact@hdaroit.fr> (https://github.com/Yaty)",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "cheerio": "^1.0.0-rc.3",
+    "config": "^3.1.0",
+    "got": "^9.6.0",
+    "mustache": "^3.0.1",
+    "puppeteer": "^1.14.0"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.11",
+    "@types/config": "0.0.34",
+    "@types/mustache": "^0.8.32",
+    "@types/puppeteer": "^1.12.3",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.1.0",
+    "tsconfig-paths": "^3.8.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.4"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
