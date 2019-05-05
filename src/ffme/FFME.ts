@@ -88,7 +88,9 @@ export default class FFME {
 
     const getStages = () => Promise.all(rawData.stages && rawData.stages.map((stage) => {
       const newStage = new Stage(
+        // TODO
         stage.ID,
+        '',
         '',
       );
 

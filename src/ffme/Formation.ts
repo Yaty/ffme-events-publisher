@@ -5,13 +5,14 @@ import FFMEEvent from './FFMEEvent';
 export default class Formation extends FFMEEvent {
   constructor(
     public readonly id: string,
-    public readonly name: string,
+    title: string,
     public readonly startDate: string,
     public readonly endDate: string,
     public readonly city: string,
     link: string,
+    mediaUrl?: string,
   ) {
-    super(link);
+    super(link, title, mediaUrl);
   }
 
   async getRegistrationLimitDate(): Promise<Date> {

@@ -7,7 +7,9 @@ export default abstract class FFMEEvent {
   public remainingDaysUntilRegistrationLimitDate: number;
 
   protected constructor(
+    public title: string,
     public link: string,
+    public mediaUrl?: string,
   ) {}
 
   public async build(): Promise<this> {
