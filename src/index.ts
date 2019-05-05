@@ -30,6 +30,3 @@ import chalk from 'chalk';
     process.exit(1);
   }
 })();
-
-// TODO : https://github.com/nexe/nexe
-// TODO : Avoir le lien de l'affiche en HD pour la mettre dans le post
