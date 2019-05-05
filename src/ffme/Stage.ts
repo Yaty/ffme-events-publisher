@@ -10,7 +10,12 @@ export default class Stage extends FFMEEvent {
     super(link, title, mediaUrl);
   }
 
-  async getRegistrationLimitDate(): Promise<Date> {
+  getRegistrationLimitDate(): Date {
     return new Date();
+  }
+
+  getFullness(): boolean {
+    // no way to have this info
+    return false;
   }
 }

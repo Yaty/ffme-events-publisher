@@ -1,4 +1,3 @@
-import * as got from 'got';
 import Parser from './Parser';
 import FFMEEvent from './FFMEEvent';
 
@@ -15,11 +14,11 @@ export default class Formation extends FFMEEvent {
     super(link, title, mediaUrl);
   }
 
-  async getRegistrationLimitDate(): Promise<Date> {
-    const {
-      body,
-    } = await got(this.link);
+  getRegistrationLimitDate(): Date {
+    return Parser.getFormationRegistrationLimitDate(this.html);
+  }
 
-    return Parser.getFormationRegistrationLimitDateFromHTML(body);
+  getFullness(): boolean {
+    return Parser.getFormationRemainingRegistrations(this.html) === 0;
   }
 }

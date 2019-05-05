@@ -1,10 +1,15 @@
+import * as got from 'got';
+
 import {
   getDateDiffInDaysFromNow,
 } from '../utils';
 
 export default abstract class FFMEEvent {
+  public isFull: boolean;
   public registrationLimitDate: Date;
   public remainingDaysUntilRegistrationLimitDate: number;
+
+  protected html: string;
 
   protected constructor(
     public title: string,
@@ -13,10 +18,17 @@ export default abstract class FFMEEvent {
   ) {}
 
   public async build(): Promise<this> {
-    this.registrationLimitDate = await this.getRegistrationLimitDate();
+    const {
+      body,
+    } = await got(this.link);
+
+    this.html = body;
+    this.isFull = await this.getFullness();
+    this.registrationLimitDate = this.getRegistrationLimitDate();
     this.remainingDaysUntilRegistrationLimitDate = getDateDiffInDaysFromNow(this.registrationLimitDate);
     return this;
   }
 
-  abstract getRegistrationLimitDate(): Promise<Date>;
+  abstract getFullness(): Promise<boolean> | boolean;
+  abstract getRegistrationLimitDate(): Date;
 }

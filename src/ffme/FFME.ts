@@ -54,7 +54,7 @@ export default class FFME {
 
   private async getRawData(): Promise<FFMERawData> {
     const ligueManagementPageHTML = await this.crawler.getLigueManagementPageHTML();
-    const dataUrls = Parser.getDataUrlsFromHTML(ligueManagementPageHTML);
+    const dataUrls = Parser.getDataUrls(ligueManagementPageHTML);
     return this.fetchRawData(dataUrls);
   }
 

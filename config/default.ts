@@ -41,6 +41,7 @@ interface Config {
       login: string;
       password: string;
     },
+    url: string,
     intranetUrl: string;
   };
   publishers: {
@@ -56,6 +57,7 @@ const config: Config = {
       login: process.env.FFME_LOGIN,
       password: process.env.FFME_PASSWORD,
     },
+    url: 'https://www.ffme.fr',
     intranetUrl: 'https://www.montagne-escalade.com',
   },
   publishers: {

@@ -9,7 +9,7 @@ import {
 } from '../types';
 
 export default class Parser {
-  static getDataUrlsFromHTML(html: string): FFMEDataUrl {
+  static getDataUrls(html: string): FFMEDataUrl {
     const $ = cheerio.load(html);
     const urls = $('#cadreTableauOngletGU > fieldset:nth-child(19) > ul:nth-child(5)');
 
@@ -20,7 +20,7 @@ export default class Parser {
     };
   }
 
-  static getCompetitionRegistrationLimitDateFromHTML(html: string): Date {
+  static getCompetitionRegistrationLimitDate(html: string): Date {
     const $ = cheerio.load(html);
     const text = $('span:contains("Date limite d\'inscription :")').parent().text();
 
@@ -33,7 +33,7 @@ export default class Parser {
     return getTheEndOfTheDayDate(date, month, year);
   }
 
-  static getFormationRegistrationLimitDateFromHTML(html: string): Date {
+  static getFormationRegistrationLimitDate(html: string): Date {
     const $ = cheerio.load(html);
     const text = $('h3:contains("Date limite d\'inscription :")').next().text();
 
@@ -42,5 +42,26 @@ export default class Parser {
       .map(Number);
 
     return getTheEndOfTheDayDate(date, month, year);
+  }
+
+  static getCompetitionMaxRegistration(html: string): number | void {
+    const $ = cheerio.load(html);
+    const el = $('span:contains("Nombre de places :")');
+
+    if (el) {
+      return Number(el.parent().text());
+    }
+  }
+
+  static getCompetitionRegistration(html: string): number {
+    const $ = cheerio.load(html);
+    const text = $('.infos_colonne_box > p:nth-child(2) > b:nth-child(1)').text();
+    return Number(text.split(':').pop().trim());
+  }
+
+  static getFormationRemainingRegistrations(html: string): number {
+    const $ = cheerio.load(html);
+    const text = $('h3:contains("Nombre de places restantes :")').next().text();
+    return Number(text);
   }
 }

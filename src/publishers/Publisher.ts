@@ -31,15 +31,15 @@ export default abstract class Publisher {
   }
 
   private shouldPublishFormation(formation: Formation): boolean {
-    return this.publishFormationInDays.includes(formation.remainingDaysUntilRegistrationLimitDate);
+    return this.publishFormationInDays.includes(formation.remainingDaysUntilRegistrationLimitDate) && !formation.isFull;
   }
 
   private shouldPublishCompetition(competition: Competition): boolean {
-    return this.publishCompetitionInDays.includes(competition.remainingDaysUntilRegistrationLimitDate);
+    return this.publishCompetitionInDays.includes(competition.remainingDaysUntilRegistrationLimitDate) && !competition.isFull;
   }
 
   private shouldPublishStage(stage: Stage): boolean {
-    return this.publishStageInDays.includes(stage.remainingDaysUntilRegistrationLimitDate);
+    return this.publishStageInDays.includes(stage.remainingDaysUntilRegistrationLimitDate) && !stage.isFull;
   }
 
   public async publishFormation(formation: Formation): Promise<void> {
