@@ -16,7 +16,8 @@
     "config": "^3.1.0",
     "got": "^9.6.0",
     "mustache": "^3.0.1",
-    "puppeteer": "^1.14.0"
+    "puppeteer": "^1.14.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.11",
