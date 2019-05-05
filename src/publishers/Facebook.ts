@@ -13,7 +13,7 @@ export default class Facebook extends Publisher {
     this.accessToken = config.get('facebook.accessToken');
   }
 
-  public async post(message: string, event: FFMEEvent): Promise<void> {
+  public async post(message: string, event: FFMEEvent): Promise<boolean> {
     // https://developers.facebook.com/docs/graph-api/reference/v3.3/post
     await got.post(this.apiUrl + '/feed', {
       query: {
@@ -23,5 +23,7 @@ export default class Facebook extends Publisher {
         picture: event.mediaUrl,
       },
     });
+
+    return true;
   }
 }

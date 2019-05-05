@@ -18,7 +18,7 @@ export default class Wordpress extends Publisher {
     this.apiUrl = config.get('publishers.wordpress.apiUrl');
   }
 
-  public async post(message: string, event: FFMEEvent): Promise<void> {
+  public async post(message: string, event: FFMEEvent): Promise<boolean> {
     const categories = [];
 
     if (event instanceof Competition) {
@@ -55,5 +55,7 @@ export default class Wordpress extends Publisher {
         featured_media: featuredMediaId,
       },
     });
+
+    return true;
   }
 }

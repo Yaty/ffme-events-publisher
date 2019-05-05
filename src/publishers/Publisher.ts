@@ -9,7 +9,7 @@ import FFMEEvent from '../ffme/FFMEEvent';
 
 export default abstract class Publisher {
   private readonly publisherName: string;
-  abstract post(message: string, event: FFMEEvent): Promise<void>;
+  abstract post(message: string, event: FFMEEvent): Promise<boolean>;
 
   protected readonly formationTemplate: string;
   protected readonly competitionTemplate: string;
@@ -54,9 +54,11 @@ export default abstract class Publisher {
     }
 
     const message = mustache.render(this.formationTemplate, formation);
-    await this.post(message, formation);
+    const published = await this.post(message, formation);
 
-    console.log(chalk.green(`Compétition [${formation.title}] publiée dans ${this.publisherName} !`));
+    if (published) {
+      console.log(chalk.green(`Compétition [${formation.title}] publiée dans ${this.publisherName} !`));
+    }
   }
 
   public async publishCompetition(competition: Competition): Promise<void> {
@@ -71,9 +73,11 @@ export default abstract class Publisher {
     }
 
     const message = mustache.render(this.competitionTemplate, competition);
-    await this.post(message, competition);
+    const published = await this.post(message, competition);
 
-    console.log(chalk.green(`Compétition [${competition.title}] publiée dans ${this.publisherName} !`));
+    if (published) {
+      console.log(chalk.green(`Compétition [${competition.title}] publiée dans ${this.publisherName} !`));
+    }
   }
 
   public async publishStage(stage: Stage): Promise<void> {
@@ -88,8 +92,10 @@ export default abstract class Publisher {
     }
 
     const message = mustache.render(this.stageTemplate, stage);
-    await this.post(message, stage);
+    const published = await this.post(message, stage);
 
-    console.log(chalk.green(`Stage [${stage.title}] publié dans ${this.publisherName} !`));
+    if (published) {
+      console.log(chalk.green(`Stage [${stage.title}] publié dans ${this.publisherName} !`));
+    }
   }
 }

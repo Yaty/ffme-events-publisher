@@ -87,13 +87,13 @@ export default class Instagram extends Publisher {
     this.logged = true;
   }
 
-  public async post(message: string, event: FFMEEvent): Promise<void> {
+  public async post(message: string, event: FFMEEvent): Promise<boolean> {
     if (!event.mediaUrl) {
       console.log(
-        chalk.yellow(`L'evénement ${event.title} ne sera pas publié sur Instagram car il ne possède pas un media.`),
+        chalk.yellow(`L'evénement ${event.title} ne sera pas publié sur Instagram car il ne possède pas de média.`),
       );
 
-      return;
+      return false;
     }
 
     const filePath = await downloadMedia(event.mediaUrl);
@@ -116,5 +116,6 @@ export default class Instagram extends Publisher {
 
     await this.page.waitForXPath(this.selector.publishConfirmation);
     await deleteFile(filePath);
+    return true;
   }
 }
