@@ -17,17 +17,23 @@ interface Publisher {
   stages: Stage;
 }
 
-// tslint:disable-next-line:no-empty-interface
-interface Wordpress extends Publisher {}
+interface Wordpress extends Publisher {
+  apiUrl: string;
+  username: string;
+  password: string;
+}
 
 interface Facebook extends Publisher {
-  uri: string;
+  apiUrl: string;
   accessToken: string;
   pageId: string;
 }
 
-// tslint:disable-next-line:no-empty-interface
-interface Instagram extends Publisher {}
+interface Instagram extends Publisher {
+  url: string;
+  username: string;
+  password: string;
+}
 
 interface Config {
   ffme: {
@@ -54,39 +60,45 @@ const config: Config = {
   },
   publishers: {
     wordpress: {
+      apiUrl: 'https://escalade-normandie.com/wp-json',
+      username: process.env.WORDPRESS_USERNAME,
+      password: process.env.WORDPRESS_PASSWORD,
       formations: {
-        publishOnDays: [],
+        publishOnDays: [60],
       },
       competitions: {
-        publishOnDays: [],
+        publishOnDays: [14],
       },
       stages: {
-        publishOnDays: [],
+        publishOnDays: [60],
       },
     },
     facebook: {
-      uri: 'https://graph.facebook.com',
+      apiUrl: 'https://graph.facebook.com',
       accessToken: process.env.FB_ACCESS_TOKEN,
       pageId: process.env.FB_PAGE_ID,
       formations: {
-        publishOnDays: [],
+        publishOnDays: [30, 60],
       },
       competitions: {
-        publishOnDays: [],
+        publishOnDays: [7, 30],
       },
       stages: {
-        publishOnDays: [],
+        publishOnDays: [30, 60],
       },
     },
     instagram: {
+      url: 'https://www.instagram.com',
+      username: process.env.INSTAGRAM_USERNAME,
+      password: process.env.INSTAGRAM_PASSWORD,
       formations: {
-        publishOnDays: [],
+        publishOnDays: [30, 60],
       },
       competitions: {
-        publishOnDays: [],
+        publishOnDays: [7, 30],
       },
       stages: {
-        publishOnDays: [],
+        publishOnDays: [30, 60],
       },
     },
   },
